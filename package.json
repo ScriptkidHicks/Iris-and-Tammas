@@ -1,0 +1,11 @@
+{
+  "name": "adamproject",
+  "version": "1.0.0",
+  "description": "My work with Adam",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tammas and Adam",
+  "license": "ISC"
+}
