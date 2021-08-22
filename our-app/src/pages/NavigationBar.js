@@ -7,23 +7,25 @@ function NavigationBar() {
       <div>
         <h1 className={classes.title}>Dungeon Bros</h1>
       </div>
-      <ul>
-        <li>
-          <Link to="/" className={classes.link}>
-            Main Page
-          </Link>
-        </li>
-        <li>
-          <Link to="/sign-in" className={classes.link}>
-            Sign In
-          </Link>
-        </li>
-        <li>
-          <Link to="/create-profile" className={classes.link}>
-            Create Profile
-          </Link>
-        </li>
-      </ul>
+      <div className={classes.linkHolder}>
+        <ul>
+          <li>
+            <Link to="/" className={classes.link}>
+              Main Page
+            </Link>
+          </li>
+          <li>
+            <Link to="/sign-in" className={classes.link}>
+              Sign In
+            </Link>
+          </li>
+          <li>
+            <Link to="/create-profile" className={classes.link}>
+              Create Profile
+            </Link>
+          </li>
+        </ul>
+      </div>
     </header>
   );
 }

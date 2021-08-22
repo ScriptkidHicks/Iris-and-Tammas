@@ -1,0 +1,52 @@
+.main {
+  background: url("../images/card6.png");
+  width: 500px;
+  height: 550px;
+  border: 4px solid black;
+  border-radius: 30px;
+  margin-top: 10%;
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.55);
+  position: relative;
+  left: 60%;
+}
+
+.title {
+  padding-top: 7%;
+  text-align: center;
+  font-size: 18pt;
+  color: black;
+  text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+}
+
+.inputs {
+  background-color: rgba(245, 222, 179, 0.5);
+  border: black solid 2px;
+  border-radius: 6px;
+  margin-top: 15px;
+  height: 25px;
+  margin-right: 250px;
+  margin-bottom: 20px;
+}
+
+.labels {
+  color: black;
+  font-weight: bold;
+  margin-top: 5px;
+  font-size: 14pt;
+}
+
+.contentForm {
+  float: right;
+}
+
+.btn {
+  width: 30%;
+  height: 30px;
+  border-radius: 10px;
+  margin-left: 53%;
+  background-color: rgb(226, 201, 154);
+}
+
+.btn:hover {
+  background-color: rgb(189, 168, 129);
+}
