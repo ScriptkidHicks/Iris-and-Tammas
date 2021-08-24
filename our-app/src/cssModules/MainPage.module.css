@@ -1,0 +1,52 @@
+.main {
+  background: url("../images/card5.jpg");
+  background-size: cover;
+  border: 5px solid black;
+  border-radius: 20px;
+  position: relative;
+  top: 100px;
+  width: 1500px;
+  height: 2000px;
+  text-align: center;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: [firstC] 5% [a] 5% [b] 5% [c] 5% [secondC] 20% [thirdC] 20% [fourthC] 20% [fifthC] 20% [sixthC];
+  grid-template-rows: [headroom] 5% [headroom2] 5% [headroom3] 5% [firstR] 5% [secondR] 20% [thirdR] 20% [fourthR] 20% [fifthR] 20% [sixthR];
+  box-shadow: 20px -10px 10px rgba(0, 0, 0, 0.7);
+}
+
+.declare {
+  color: black;
+  /*text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;*/
+  font-size: 30pt;
+}
+
+.declareContainer {
+  grid-column-start: thirdC;
+  grid-column-end: fifthC;
+  grid-row-start: headroom3;
+  grid-row-end: firstR;
+  background: rgb(204, 163, 87);
+  opacity: 1;
+  border: 4px black solid;
+  border-radius: 20px;
+  box-shadow: 20px -10px 10px rgba(0, 0, 0, 0.6);
+}
+
+.description {
+  border-radius: 30px;
+  border: 4px black solid;
+  grid-row-start: secondR;
+  grid-row-end: thirdR;
+  grid-column-start: b;
+  grid-column-end: fourthC;
+  background: rgb(204, 163, 87);
+  box-shadow: 20px -10px 10px rgba(0, 0, 0, 0.6);
+}
+
+p {
+  line-height: 1.6;
+  font-size: 16pt;
+  padding: 40px;
+  text-align: left;
+}
