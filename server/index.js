@@ -3,16 +3,27 @@ const cors = require("cors");
 const app = express();
 const port = 3002;
 
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
 
-const usernames = ["string one", "string two"];
+const users = [
+  { name: "Tammas", email: "Tamhicks@yahoo.com", password: "Nope!" },
+];
 
 app.get("/", (req, res) => {
-  res.send("<h1>Larger Text</h1>");
+  res
+    .cookie("nameOfOurCookieMonster", "theCookieValue", {
+      maxAge: 60 * 60 * 1000,
+      httpOnly: false,
+      secure: false,
+      sameSite: false,
+    })
+    .send("<h1>Larger Text</h1>");
 });
 
-app.get("/user/:id", (req, res) => {
+app.get("/auth/user/:id", (req, res) => {
   console.log(req.params.id);
   if (usernames.includes(req.params.id)) {
     console.log("Success!");
@@ -23,10 +34,33 @@ app.get("/user/:id", (req, res) => {
   }
 });
 
-app.post("/users", (req, res) => {
+app.post("/auth/users", (req, res) => {
   console.log(req.body);
-  usernames.push(req.body.username);
-  res.send("success!");
+  if (users.find((user) => user.email === req.body.email)) {
+    console.warn("ERROR! ERROR! ERROR!");
+    res.status(409).send();
+  } else {
+    users.push(req.body);
+    res.status(201).send();
+  }
+  console.log(users);
+});
+
+app.put("/auth/user", (req, res) => {
+  console.log(req.body);
+  const specUser = users.find((user) => user.email === req.body.email);
+  if (!specUser) {
+    res.status(404).send("That user does not exist");
+    return;
+  }
+  if (req.body.action !== "create-session") {
+    res.status(404).send("We haven't handled that yet");
+    return;
+  }
+  const sessionID = 23981273987123;
+  specUser.sessionID = sessionID;
+  console.log(specUser);
+  res.status(200).send("Session ID set");
 });
 
 const server = app.listen(port, () => {
