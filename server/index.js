@@ -1,3 +1,4 @@
+const { v4: uuid } = require("uuid");
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -8,18 +9,29 @@ app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
 
+const cookieConfig = {
+  maxAge: 60 * 60 * 1000,
+  httpOnly: false,
+  secure: false,
+  sameSite: false,
+};
+
+function omit(obj, ...omitNames) {
+  const obscuredObject = { ...obj };
+  omitNames.forEach((name) => {
+    delete obscuredObject[name];
+  });
+
+  return obscuredObject;
+}
+
 const users = [
   { name: "Tammas", email: "Tamhicks@yahoo.com", password: "Nope!" },
 ];
 
 app.get("/", (req, res) => {
   res
-    .cookie("nameOfOurCookieMonster", "theCookieValue", {
-      maxAge: 60 * 60 * 1000,
-      httpOnly: false,
-      secure: false,
-      sameSite: false,
-    })
+    .cookie("nameOfOurCookieMonster", "theCookieValue", cookieConfig)
     .send("<h1>Larger Text</h1>");
 });
 
@@ -53,14 +65,24 @@ app.put("/auth/user", (req, res) => {
     res.status(404).send("That user does not exist");
     return;
   }
-  if (req.body.action !== "create-session") {
+  if (req.body.action !== "login") {
     res.status(404).send("We haven't handled that yet");
     return;
   }
-  const sessionID = 23981273987123;
+  if (specUser.sessionID) {
+    res
+      .status(200)
+      .cookie("nameOfOurCookieMonster", specUser.sessionID, cookieConfig)
+      .send(omit(specUser, "password"));
+    console.log("Spec user sessionID: ", specUser.sessionID);
+    return;
+  }
+  const sessionID = uuid();
   specUser.sessionID = sessionID;
   console.log(specUser);
-  res.status(200).send("Session ID set");
+  res
+    .cookie("nameOfOurCookieMonster", sessionID, cookieConfig)
+    .send("<h1>Larger Text</h1>");
 });
 
 const server = app.listen(port, () => {

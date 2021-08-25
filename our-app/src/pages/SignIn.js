@@ -5,18 +5,33 @@ function SignIn() {
   return (
     <div className={classes.main}>
       <h2 className={classes.signInTitle}>Sign In</h2>
-      <form>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          const [{ value: email }, { value: password }] = event.target;
+
+          console.log(event.target);
+
+          fetch("/auth/user", {
+            credentials: "include",
+            mode: "cors",
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email,
+              password,
+              action: "login",
+            }),
+          });
+        }}
+      >
         <div className={classes.inputsDiv}>
-          <label for="username" className={classes.inputLabel}>
-            Username:
+          <label htmlFor="email" className={classes.inputLabel}>
+            Email:
           </label>
-          <input
-            type="text"
-            name="username"
-            className={classes.inputBox}
-          ></input>
+          <input type="email" name="email" className={classes.inputBox}></input>
           <br></br>
-          <label for="pass" className={classes.inputLabel}>
+          <label htmlFor="pass" className={classes.inputLabel}>
             Password:
           </label>
           <input
@@ -26,7 +41,7 @@ function SignIn() {
           ></input>
         </div>
         <div className={classes.subButtonHolder}>
-          <button type="submit" formaction="" className={classes.btn}>
+          <button type="submit" formAction="" className={classes.btn}>
             Submit
           </button>
         </div>
